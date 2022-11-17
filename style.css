@@ -1,3 +1,56 @@
 * {
     box-sizing: border-box;
 }
+
+html,
+body {
+    height: 100%;
+    font-family: sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+button {
+    width: 75px;
+    height: 70px;
+    font-size: 1.3em;
+}
+
+.button-container {
+    display: flex;
+}
+
+.left-column {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.outline {
+    background-color: rgb(208, 208, 208);
+    flex: 0 1 auto;
+    align-self: start;
+    width: 300px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    margin: 25px;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.screen {
+    flex: 1;
+    padding: 20px;
+    text-align: end;
+}
+
+.zero {
+    flex: 1;
+}
