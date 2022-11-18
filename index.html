@@ -6,18 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="./style.css">
-    <script src="./script.js"></script>
+    <script src="./script.js" defer></script>
 </head>
 <body>
     <div class="outline">
-        <div class="screen">
-            <h3>First Line</h3>
-            <h2>Second Line</h2>
+        <div class="screen-container">
+            <div class="screen">
+                <h3></h3>
+                <h2></h2>
+            </div>
         </div>
         <div class="button-container">
             <div class="left-column">
-                <button class="erasers">AC</button>
-                <button class="erasers">C</button>
+                <button id="clear">C</button>
+                <button id="delete">Del</button>
                 <button class="operator">%</button>
                 <button class="nums">1</button>
                 <button class="nums">2</button>
@@ -29,16 +31,17 @@
                 <button class="nums">8</button>
                 <button class="nums">9</button>
                 <button class="nums zero">0</button>
-                <button class="nums">.</button>
+                <button class="nums dot">.</button>
             </div>
             <div class="right-column">
                 <button class="operator">÷</button>
                 <button class="operator">x</button>
                 <button class="operator">-</button>
                 <button class="operator">+</button>
-                <button class="operator">=</button>
+                <button class="equals">=</button>
             </div>
         </div>
     </div>
+    <p>Murat ULUTÜRK © 2022</p>
 </body>
 </html>
