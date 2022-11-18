@@ -24,6 +24,8 @@ function operate() {
         numArray[operationIndex] = Math.round((firstNumber * secondNumber) * 1000) / 1000;
     } else if (currentOperation === "÷") {
         numArray[operationIndex] = Math.round((firstNumber / secondNumber) * 1000) / 1000;
+    } else {
+        numArray[operationIndex] = Math.round((firstNumber ** secondNumber) * 1000) / 1000;
     }
     // Below line is to remove second number. First one is replaced by the result. This is necessary as we get one
     // result out of two number inputs.
@@ -67,36 +69,35 @@ function enterNumber() {
     }
     // Re-enable equals after a number is entered. This way user can not use an operation and equals right after.
     equalsButton.disabled = false;
-    // Enable operations after a number is entered.
-    operButtons.forEach((button) => {
-        button.disabled = false;
-    });
     inputLine.textContent += `${this.textContent}`;
 }
 
 function enterOperator() {
+    // Prevent user from chaining operators. There is always a space after an operator.
+    if (inputLine.textContent[inputLine.textContent.length - 1] === " ") {
+        return;
+    }
     inputLine.textContent += ` ${this.textContent} `;
     // After an operator dot button can be used again as whatever is entered will be 
     // stored as a new number with only one dot.
     dotButton.disabled = false;
     // We need to prevent user from using equals right after entering an operator (without a second number).
     equalsButton.disabled = true;
-    // Prevent user from chaining operations.
-    operButtons.forEach((button) => {
-        button.disabled = true;
-    });
+
     getOper();
 }
 
 function deleteChar() {
     const deletedCharacter = inputLine.textContent.charAt(inputLine.textContent.length - 1);
-    // Re-enable operators if an operator was deleted as that means they are not being chained.
-    // There is always a space before and after an operator. Use that to determine the situation.
+    // There is always a space before and after an operator. Use that to determine if an operator was deleted.
     if (deletedCharacter === " ") {
         inputLine.textContent = inputLine.textContent.slice(0, -3);
-        operButtons.forEach((button) => {
-            button.disabled = false;
-        });
+        // Re-enable equals as deleting an operator leaves a number in the end.
+        equalsButton.disabled = false;
+        // Pop both the latest number and operator. A number is registered to the array when an operator is used
+        // so we have to reset that too.
+        numArray.pop();
+        operArray.pop();
     } else {
         inputLine.textContent = inputLine.textContent.slice(0, -1);
         // Re-enable dot button if a dot was deleted because that means dots are not being chained.
@@ -110,9 +111,6 @@ function clearScreen() {
     // Reset the buttons to initial state.
     dotButton.disabled = false;
     equalsButton.disabled = false;
-    operButtons.forEach((button) => {
-        button.disabled = false;
-    });
     // Empty the arrays.
     numArray.length = 0;
     operArray.length = 0;
